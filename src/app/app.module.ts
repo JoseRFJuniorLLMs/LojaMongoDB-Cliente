@@ -20,10 +20,13 @@ import { FormsModule } from '@angular/forms';
 import { DataApiService } from 'src/app/services/data-api.service';
 import { ModalComponent } from './components/modal/modal.component';
 import { TruncateTextPipe } from './pipes/truncate-text.pipe';
-
+import { ProdutoService } from 'src/app/components/produto/produto.service';
 // Externals
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProdutoListaComponent } from './components/admin/lista-produtos/produtolista.component';
+import { EditarComponent } from './components/produto/editar/editar.component';
+import { CadastrarComponent } from './components/produto/cadastrar/cadastrar.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ProfileComponent,
     Page404Component,
     ModalComponent,
-    TruncateTextPipe
+    TruncateTextPipe,
+    ProdutoListaComponent,
+    EditarComponent,
+    CadastrarComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, NgxSpinnerModule, NgxPaginationModule],
   providers: [DataApiService],

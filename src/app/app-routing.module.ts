@@ -9,12 +9,16 @@ import { RegisterComponent } from 'src/app/components/user/register/register.com
 import { ProfileComponent } from 'src/app/components/user/profile/profile.component';
 import { Page404Component } from 'src/app/components/page404/page404.component';
 
+import { ProdutoListaComponent } from 'src/app/components/admin/lista-produtos/produtolista.component';
+
 import { AuthGuard } from './guards/auth.guard';
+import { from } from 'rxjs';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'offers', component: OffersComponent, canActivate: [AuthGuard] }, // TODO: only users auth
   { path: 'book/:id', component: DetailsBookComponent },
+  { path: 'admin/lista-produtos', component: ProdutoListaComponent, canActivate: [AuthGuard] }, // TODO: only produto auth
   { path: 'admin/list-books', component: ListBooksComponent, canActivate: [AuthGuard] }, // TODO: only users auth
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },

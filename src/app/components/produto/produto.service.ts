@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 
-import { ProdutoInterface } from '../models/produto-interface';
-import { AuthService } from './auth.service';
+import { ProdutoInterface } from '../../models/produto-interface';
+import { AuthService } from '../../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProdutoDataApiService {
+export class ProdutoService {
 
   constructor(
       private http: HttpClient, 

@@ -11,22 +11,25 @@ import { UserInterface } from "../models/user-interface";
 })
 export class AuthService {
 
-  constructor(private htttp: HttpClient) {}
-
+  constructor(
+    private http: HttpClient, 
+    private authService: AuthService) { }
+  
   headers: HttpHeaders = new HttpHeaders(
     {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Accept-Charset': 'utf-8',
-    'Access-Control-Allow-Origin': '*',
-    'Authorization':'Bearer'
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Accept-Charset': 'utf-8',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE', 'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
     }
   );
 
   registerUser(name: string, email: string, password: string) {
     const url_api = "http://localhost:3000/api/Users";
-    return this.htttp
-      .post<UserInterface>(
+    return this.http
+
+    .post<UserInterface>(
         url_api,
         {
           name: name,
@@ -40,7 +43,7 @@ export class AuthService {
 
   loginuser(email: string, password: string): Observable<any> {
     const url_api = "http://localhost:3000/api/Users/login?include=user";
-    return this.htttp
+    return this.http
       .post<UserInterface>(
         url_api,
         { email, password },
@@ -77,6 +80,6 @@ export class AuthService {
     const url_api = `http://localhost:3000/api/Users/logout?access_token=${accessToken}`;
     localStorage.removeItem("accessToken");
     localStorage.removeItem("currentUser");
-    return this.htttp.post<UserInterface>(url_api, { headers: this.headers });
+    return this.http.post<UserInterface>(url_api, { headers: this.headers });
   }
 }

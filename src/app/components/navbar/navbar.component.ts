@@ -8,8 +8,12 @@ import { Location } from '@angular/common';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  constructor(private authService: AuthService, private location: Location) { }
-  public app_name = 'Books Store';
+
+  constructor(
+    private authService: AuthService, 
+    private location: Location) { }
+  
+  public app_name = 'ERP';
   public isLogged = false;
 
   ngOnInit() {
