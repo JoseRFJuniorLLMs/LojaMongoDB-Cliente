@@ -1,5 +1,7 @@
 #Inicialmente feito em NODEJS.
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/DevJoseWeb/LojaMongoDB-Cliente.svg)](https://greenkeeper.io/)
+
 accesstoken
 { 
     "_id" : "2w1pIiWg3h8DzKOjacnk4ziQAVWvRtB23CBYqnpbk1oTgSBMdHJ22JUEtWy8W2u8", 
