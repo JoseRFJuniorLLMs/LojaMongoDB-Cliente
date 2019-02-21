@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { ProdutoInterface } from '../../models/produto-interface';
 import { AuthService } from '../../services/auth.service';
+import { Cor } from 'src/app/models/cor';
 
 @Injectable({
   providedIn: 'root'

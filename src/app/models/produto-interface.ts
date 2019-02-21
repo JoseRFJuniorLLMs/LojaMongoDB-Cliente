@@ -1,3 +1,4 @@
+import { Cor } from "./cor";
 export class ProdutoInterface {
     _id: string;
     uuid: string;

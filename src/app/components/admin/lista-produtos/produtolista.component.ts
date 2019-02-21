@@ -17,8 +17,10 @@ export class ProdutoListaComponent implements OnInit {
   constructor(private produtoDataApiService: ProdutoDataApiService) { }
 
   private produtos: ProdutoInterface;
+
   pageActual: number = 1;
   public myCounter: number = 0;
+  
   ngOnInit() {
     this.getListProdutos();
   }

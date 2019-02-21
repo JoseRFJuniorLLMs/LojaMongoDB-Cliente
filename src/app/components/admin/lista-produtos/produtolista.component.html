@@ -7,7 +7,12 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Descricao</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Embalagem</th>
+          <th scope="col">Durabilidade</th>
+          <th scope="col">peso</th>
+          <th scope="col">cor</th>
           <th scope="col">&nbsp;</th>
           <th scope="col">&nbsp;</th>
         </tr>
@@ -17,7 +22,13 @@
 
           <th scope="row"> {{i+1}}</th>
           <td>{{produto.descricao}}</td>
-          <td>{{produto.oferta == 1 ? 'SI' : 'NO'}}</td>
+          <td>R$ {{produto.preco}}</td>
+          <td>{{produto.ebalagem}}</td>
+          <td>{{produto.durabilidade}}</td>
+          <td>{{produto.peso}}</td>
+          <td>{{produto.cor.nome}}</td>
+          
+        
           <td>
             <button class="btn btn-primary" (click)="onPreUpdateProduto(produto)"
              data-toggle="modal" data-target="#modalProduto">Atualizar</button>
