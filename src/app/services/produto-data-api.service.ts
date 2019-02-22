@@ -1,29 +1,61 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
+//import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
+//import { map } from 'rxjs/operators';
+import { flatMap, catchError, map } from 'rxjs/operators';
 
-import { ProdutoInterface } from '../models/produto-interface';
+//import { ProdutoInterface } from '../models/produto-interface';
 import { AuthService } from './auth.service';
-import { Cor } from '../models/cor';
+import { CorDataApiService } from './cor-data-api.service';
+import { Produto } from '../models/produto';
+
+import { BaseResourceService } from '../services/BaseResourceService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProdutoDataApiService {
+export class ProdutoDataApiService extends BaseResourceService<Produto> {
 
   constructor(
-      private http: HttpClient, 
-      private authService: AuthService) { }
+    protected injector: Injector,
+    protected http: HttpClient,
+    private corDataApiService: CorDataApiService,
+    private authService: AuthService
+    ) {
+   super('api/produtos', injector, Produto.fromJson);
+ }
+
+/*
   
-  produtos: Observable<any>;
-  produto: Observable<any>;
+   produtos: Observable<any>;
+  produto: Observable<any>; 
   
   public selectedProduto: ProdutoInterface = {
         _id: '', uuid: '', descricao: '', preco: '',
          durabilidade: '', peso: '', rotulagem: '', status: ''
-  };
+  };*/
 
+  create(produto: Produto): Observable<Produto> {
+    return this.setCorAndSendToServer(produto, super.create.bind(this));
+  }
+
+  update(produto: Produto): Observable<Produto> {
+    return this.setCorAndSendToServer(produto, super.update.bind(this));
+  }
+
+  private setCorAndSendToServer(produto: Produto, sendFn: any): Observable<Produto> {
+    return this.corDataApiService.getById(produto._id).pipe(
+      flatMap(cor => {
+        produto.cor = cor;
+        return sendFn(produto);
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+
+/* 
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -87,5 +119,5 @@ export class ProdutoDataApiService {
          headers: this.headers 
         })
       .pipe(map(data => data));
-  }
+  } */
 }

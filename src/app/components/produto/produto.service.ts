@@ -10,6 +10,8 @@ import { Produto } from 'src/app/models/produto';
 
 import { AuthService } from '../../services/auth.service';
 import { BaseResourceService } from 'src/app/services/BaseResourceService';
+import { CorDataApiService } from 'src/app/services/cor-data-api.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,7 @@ export class ProdutoService extends BaseResourceService<Produto> {
   constructor(
       protected injector: Injector,
       protected http: HttpClient,
+      private corService: CorDataApiService,
       protected authService: AuthService) {
         super('api/produtos', injector, Produto.fromJson);
        }
@@ -95,39 +98,23 @@ export class ProdutoService extends BaseResourceService<Produto> {
         })
       .pipe(map(data => data));
   }
-/* 
-  create(entry: Entry): Observable<Entry> {
-    return this.setCategoryAndSendToServer(entry, super.create.bind(this));
+
+  create(produto: Produto): Observable<Produto> {
+    return this.setCorAndSendToServer(produto, super.create.bind(this));
   }
 
-  update(entry: Entry): Observable<Entry> {
-    return this.setCategoryAndSendToServer(entry, super.update.bind(this))
+  update(produto: Produto): Observable<Produto> {
+    return this.setCorAndSendToServer(produto, super.update.bind(this));
   }
 
-  getByMonthAndYear(month: number, year: number): Observable<Entry[]> {
-    return this.getAll().pipe(
-      map(entries => this.filterByMonthAndYear(entries, month, year))
-    )
-  }
-
-  private setCategoryAndSendToServer(entry: Entry, sendFn: any): Observable<Entry>{
-    return this.categoryService.getById(entry.categoryId).pipe(
-      flatMap(category => {
-        entry.category = category;
-        return sendFn(entry)
+  private setCorAndSendToServer(produto: Produto, sendFn: any): Observable<Produto>{
+    return this.corService.getById(produto._id).pipe(
+      flatMap(cor => {
+        produto.cor = cor;
+        return sendFn(produto);
       }),
       catchError(this.handleError)
     );
   }
+ }
 
-  private filterByMonthAndYear(entries: Entry[], month: number, year: number) {
-    return entries.filter(entry => {
-      const entryDate = moment(entry.date, 'DD/MM/YYYY');
-      const monthMatches = entryDate.month() + 1 == month;
-      const yearMatches = entryDate.year() == year;
-
-      if(monthMatches && yearMatches) return entry;
-    })
-  } */
-
-}
