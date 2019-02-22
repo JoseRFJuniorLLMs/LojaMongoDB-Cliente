@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DataApiService } from '../../services/data-api.service';
-import { BookInterface } from '../../models/book-interface';
+import { DataApiService } from '../../../services/data-api.service';
 import { NgForm } from '@angular/forms';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+  selector: 'app-teste',
+  templateUrl: './teste.component.html',
+  styleUrls: ['./teste.component.css']
 })
 export class ModalComponent implements OnInit {
 

@@ -1,7 +1,7 @@
 <div class="row mt-5">
   <div class="col">
     <button type="button" class="btn btn-primary float-right mb-3"
-     data-toggle="modal" data-target="#modalProduto" 
+     data-toggle="modal" data-target="#produtoCadastrar" 
      (click)="resetForm()">Novo Produto</button>
     <table class="table table-hover">
       <thead>
@@ -11,8 +11,8 @@
           <th scope="col">Preço</th>
           <th scope="col">Embalagem</th>
           <th scope="col">Durabilidade</th>
-          <th scope="col">peso</th>
-          <th scope="col">cor</th>
+          <th scope="col">Peso</th>
+          <th scope="col">Cor</th>
           <th scope="col">&nbsp;</th>
           <th scope="col">&nbsp;</th>
         </tr>
@@ -23,7 +23,7 @@
           <th scope="row"> {{i+1}}</th>
           <td>{{produto.descricao}}</td>
           <td>R$ {{produto.preco}}</td>
-          <td>{{produto.ebalagem}}</td>
+          <td>{{produto.embalagem.descricao}}</td>
           <td>{{produto.durabilidade}}</td>
           <td>{{produto.peso}}</td>
           <td>{{produto.cor.nome}}</td>
@@ -31,7 +31,7 @@
         
           <td>
             <button class="btn btn-primary" (click)="onPreUpdateProduto(produto)"
-             data-toggle="modal" data-target="#modalProduto">Atualizar</button>
+             data-toggle="modal" data-target="#produtoCadastrar">Atualizar</button>
           </td>
           <td>
             <a href="/produto/lista-produtos" class="btn btn-danger"
@@ -44,4 +44,4 @@
     <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
   </div>
 </div>
-<app-modal></app-modal>
+<app-produto-cadastrar></app-produto-cadastrar>

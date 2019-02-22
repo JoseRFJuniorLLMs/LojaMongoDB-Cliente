@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { ProdutoInterface } from '../models/produto-interface';
 import { AuthService } from './auth.service';
+import { Cor } from '../models/cor';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class ProdutoDataApiService {
   
   public selectedProduto: ProdutoInterface = {
         _id: '', uuid: '', descricao: '', preco: '',
-        embalagem: '', durabilidade: '', peso: '', rotulagem: '', status: ''
+         durabilidade: '', peso: '', rotulagem: '', status: ''
   };
 
   headers: HttpHeaders = new HttpHeaders({

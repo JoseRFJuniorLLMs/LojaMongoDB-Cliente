@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ProdutoService } from '../../produto/produto.service';
-import { ProdutoInterface } from '../../../models/produto-interface';
 import { ProdutoDataApiService } from '../../../services/produto-data-api.service';
+import { ProdutoInterface } from '../../../models/produto-interface';
 
 import { NgForm } from '@angular/forms';
-import { from } from 'rxjs';
 
 @Component({
-  selector: 'app-lista',
+  selector: 'app-produtolista',
   templateUrl: './produtolista.component.html',
   styleUrls: ['./produtolista.component.css']
 })
@@ -17,7 +15,6 @@ export class ProdutoListaComponent implements OnInit {
   constructor(private produtoDataApiService: ProdutoDataApiService) { }
 
   private produtos: ProdutoInterface;
-
   pageActual: number = 1;
   public myCounter: number = 0;
   
@@ -44,7 +41,7 @@ export class ProdutoListaComponent implements OnInit {
   resetForm(produtoForm?: NgForm): void {
     this.produtoDataApiService.selectedProduto = {
       _id: '', uuid: '', descricao: '', preco: '',
-      embalagem: '', durabilidade: '', peso: '', rotulagem: '', status: ''
+       durabilidade: '', peso: '', rotulagem: '', status: ''
     };
   }
 }

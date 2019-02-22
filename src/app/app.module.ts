@@ -18,15 +18,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 // Services
 import { DataApiService } from 'src/app/services/data-api.service';
-import { ModalComponent } from './components/modal/modal.component';
+import { ModalComponent } from './components/m/modal/teste.component';
+import { ProdutoCadastrarComponent } from './components/produto/cadastrar/produto-cadastrar.component';
+
 import { TruncateTextPipe } from './pipes/truncate-text.pipe';
-import { ProdutoService } from 'src/app/components/produto/produto.service';
+import { ProdutoDataApiService } from 'src/app/services/produto-data-api.service';
 // Externals
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProdutoListaComponent } from './components/admin/lista-produtos/produtolista.component';
 import { EditarComponent } from './components/produto/editar/editar.component';
-import { CadastrarComponent } from './components/produto/cadastrar/cadastrar.component';
+
 
 @NgModule({
   declarations: [
@@ -45,10 +47,17 @@ import { CadastrarComponent } from './components/produto/cadastrar/cadastrar.com
     TruncateTextPipe,
     ProdutoListaComponent,
     EditarComponent,
-    CadastrarComponent
+    ProdutoCadastrarComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, NgxSpinnerModule, NgxPaginationModule],
-  providers: [DataApiService],
+
+  imports: [BrowserModule,
+     AppRoutingModule, 
+     HttpClientModule, 
+     FormsModule, 
+     NgxSpinnerModule, 
+     NgxPaginationModule],
+
+  providers: [DataApiService, ProdutoDataApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

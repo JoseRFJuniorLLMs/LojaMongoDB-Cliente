@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 
 import { BookInterface } from '../models/book-interface';
-
 import { AuthService } from './auth.service';
+
 @Injectable({
   providedIn: 'root'
 })

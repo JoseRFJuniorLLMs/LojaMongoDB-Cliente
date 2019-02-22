@@ -1,27 +1,34 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
+
+import { flatMap, catchError, map } from 'rxjs/operators';
 
 import { ProdutoInterface } from '../../models/produto-interface';
-import { AuthService } from '../../services/auth.service';
 import { Cor } from 'src/app/models/cor';
+import { Produto } from 'src/app/models/produto';
+
+import { AuthService } from '../../services/auth.service';
+import { BaseResourceService } from 'src/app/services/BaseResourceService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProdutoService {
+export class ProdutoService extends BaseResourceService<Produto> {
 
   constructor(
-      private http: HttpClient, 
-      private authService: AuthService) { }
-  
-  produtos: Observable<any>;
-  produto: Observable<any>;
-  
+      protected injector: Injector,
+      protected http: HttpClient,
+      protected authService: AuthService) {
+        super('api/produtos', injector, Produto.fromJson);
+       }
+
+      produtos: Observable<any>;
+      produto: Observable<any>;
+
   public selectedProduto: ProdutoInterface = {
         _id: '', uuid: '', descricao: '', preco: '',
-        embalagem: '', durabilidade: '', peso: '', rotulagem: '', status: ''
+         durabilidade: '', peso: '', rotulagem: '', status: ''
   };
 
   headers: HttpHeaders = new HttpHeaders({
@@ -34,11 +41,11 @@ export class ProdutoService {
   });
 
   getAllProdutos() {
-    const url_api = `http://localhost:8080/produtos`;
+    const url_api = `http://localhost:8080/api/produtos`;
     return this.http.get(url_api);
   }
   getNotOffers() {
-    const url_api = `http://localhost:8080/produtos?filter[where][oferta]=0`;
+    const url_api = `http://localhost:8080/api/produtos?filter[where][oferta]=0`;
     return this.http.get(url_api);
   }
   getProdutoById(id: string) {
@@ -57,7 +64,7 @@ export class ProdutoService {
     const token = this.authService.getToken();
     const url_api = `http://localhost:8080/api/produtos?access_token=${token}`;
     return this.http
-      .post<ProdutoInterface>(url_api, produto, { 
+      .post<ProdutoInterface>(url_api, produto, {
         headers: this.headers 
       })
       .pipe(map(data => data));
@@ -88,4 +95,39 @@ export class ProdutoService {
         })
       .pipe(map(data => data));
   }
+/* 
+  create(entry: Entry): Observable<Entry> {
+    return this.setCategoryAndSendToServer(entry, super.create.bind(this));
+  }
+
+  update(entry: Entry): Observable<Entry> {
+    return this.setCategoryAndSendToServer(entry, super.update.bind(this))
+  }
+
+  getByMonthAndYear(month: number, year: number): Observable<Entry[]> {
+    return this.getAll().pipe(
+      map(entries => this.filterByMonthAndYear(entries, month, year))
+    )
+  }
+
+  private setCategoryAndSendToServer(entry: Entry, sendFn: any): Observable<Entry>{
+    return this.categoryService.getById(entry.categoryId).pipe(
+      flatMap(category => {
+        entry.category = category;
+        return sendFn(entry)
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  private filterByMonthAndYear(entries: Entry[], month: number, year: number) {
+    return entries.filter(entry => {
+      const entryDate = moment(entry.date, 'DD/MM/YYYY');
+      const monthMatches = entryDate.month() + 1 == month;
+      const yearMatches = entryDate.year() == year;
+
+      if(monthMatches && yearMatches) return entry;
+    })
+  } */
+
 }

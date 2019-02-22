@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { DataApiService } from '../../../services/data-api.service';
 import { BookInterface } from '../../../models/book-interface';
+
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -9,10 +11,13 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./list-books.component.css']
 })
 export class ListBooksComponent implements OnInit {
+
   constructor(private dataApiService: DataApiService) { }
+
   private books: BookInterface;
   pageActual: number = 1;
   public myCounter: number = 0;
+  
   ngOnInit() {
     this.getListBooks();
   }
