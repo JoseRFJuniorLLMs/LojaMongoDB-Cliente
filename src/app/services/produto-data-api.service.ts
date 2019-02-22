@@ -1,11 +1,11 @@
 import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-//import { Observable } from 'rxjs/internal/Observable';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+//import { Observable } from 'rxjs';
 //import { map } from 'rxjs/operators';
 import { flatMap, catchError, map } from 'rxjs/operators';
 
-//import { ProdutoInterface } from '../models/produto-interface';
+import { ProdutoInterface } from '../models/produto-interface';
 import { AuthService } from './auth.service';
 import { CorDataApiService } from './cor-data-api.service';
 import { Produto } from '../models/produto';
@@ -26,15 +26,13 @@ export class ProdutoDataApiService extends BaseResourceService<Produto> {
    super('api/produtos', injector, Produto.fromJson);
  }
 
-/*
-  
-   produtos: Observable<any>;
+  produtos: Observable<any>;
   produto: Observable<any>; 
   
   public selectedProduto: ProdutoInterface = {
         _id: '', uuid: '', descricao: '', preco: '',
          durabilidade: '', peso: '', rotulagem: '', status: ''
-  };*/
+  };
 
   create(produto: Produto): Observable<Produto> {
     return this.setCorAndSendToServer(produto, super.create.bind(this));
@@ -54,8 +52,6 @@ export class ProdutoDataApiService extends BaseResourceService<Produto> {
     );
   }
 
-
-/* 
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -119,5 +115,5 @@ export class ProdutoDataApiService extends BaseResourceService<Produto> {
          headers: this.headers 
         })
       .pipe(map(data => data));
-  } */
+  }
 }
